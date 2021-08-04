@@ -242,7 +242,6 @@ connect = 127.0.0.1:openssh_port_c
 [openvpn]
 accept = 142
 connect = 127.0.0.1:110
-cert = /etc/stunnel/stunnel.pem
 MyStunnelC
 
  # setting stunnel ports
@@ -720,7 +719,7 @@ User=root
 NoNewPrivileges=true
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-ExecStart=/usr/bin/python -O /usr/sbin/yakult /usr/sbin/dutchmill
+ExecStart=/usr/bin/python -O /usr/sbin/yakult
 ProtectSystem=true
 ProtectHome=true
 RemainAfterExit=yes
@@ -751,7 +750,7 @@ User=root
 NoNewPrivileges=true
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-ExecStart=/usr/bin/python -O /usr/sbin/coke /usr/sbin/milo
+ExecStart=/usr/bin/python -O /usr/sbin/coke
 ProtectSystem=true
 ProtectHome=true
 RemainAfterExit=yes
@@ -1104,14 +1103,6 @@ fi
  echo -e "Configuring stunnel..."
  InsStunnel
 
-  # Configure Services
-  #echo -e "Configuring OVPN Websocket..."
-  #ovpnWS
-
- # Configuring another Services
- #echo -e "Continuing....."
- #ovpnWS1
- #systemctl restart coke
  # Configure Webmin
  echo -e "Configuring webmin..."
  InstWebmin
@@ -1127,12 +1118,26 @@ fi
   # Configure Services
  echo -e "Configuring SSH Websocket..."
  sshWS
+ systemctl daemon-reload 
  systemctl restart yakult
+ systemctl enable yakult
 
  # Configuring another Services
  echo -e "Continuing....."
  sshWS1
  
+   # Configure Services
+ echo -e "Configuring OVPN Websocket..."
+ ovpnWS
+
+ # Configuring another Services
+ echo -e "Continuing....."
+ ovpnWS1
+ systemctl restart coke
+ systemctl enable coke
+ service ssh restart
+ service sshd restart
+ service dropbear restart
  # Configuring Nginx OVPN config download site
  OvpnConfigs
 
