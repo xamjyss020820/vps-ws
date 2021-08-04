@@ -1114,35 +1114,30 @@ fi
  # Configure OpenVPN
  echo -e "Configuring OpenVPN..."
  InsOpenVPN
- 
-  # Configure Services
- echo -e "Configuring SSH Websocket..."
- sshWS
- systemctl daemon-reload 
- systemctl restart yakult
- systemctl enable yakult
 
- # Configuring another Services
- echo -e "Continuing....."
- sshWS1
- 
-   # Configure Services
- echo -e "Configuring OVPN Websocket..."
- ovpnWS
 
- # Configuring another Services
- echo -e "Continuing....."
- ovpnWS1
- systemctl restart coke
- systemctl enable coke
- service ssh restart
- service sshd restart
- service dropbear restart
  # Configuring Nginx OVPN config download site
  OvpnConfigs
 
  # Some assistance and startup scripts
  ConfStartup
+
+  # Configure Services
+ echo -e "Configuring SSH Websocket..."
+ sshWS
+
+
+ # Configuring another Services
+ echo -e "Continuing....."
+ sshWS1
+
+
+ service ssh restart
+ service sshd restart
+ service dropbear restart
+ systemctl daemon-reload 
+ systemctl restart yakult
+ systemctl enable yakult
 
  # VPS Menu script v1.0
  ConfMenu
