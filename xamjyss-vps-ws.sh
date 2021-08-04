@@ -27,7 +27,9 @@ MyScriptName=' =•= XAMJYSS143 Script =•= '
 # OpenSSH Ports
 SSH_Port1='22'
 SSH_Port2='225'
-
+# OpenSSH Ports
+WS_Port1='80'
+WS_Port2='8080'
 # Your SSH Banner
 SSH_Banner='https://pastebin.com/raw/CnKVT3de'
 
@@ -225,6 +227,10 @@ socket = l:TCP_NODELAY=1
 socket = r:TCP_NODELAY=1
 TIMEOUTclose = 0
 
+[stunnel]
+connect = 127.0.0.1:WS_Port1
+accept = WS_Port2
+
 [dropbear]
 accept = Stunnel_Port1
 connect = 127.0.0.1:dropbear_port_c
@@ -240,6 +246,9 @@ cert = /etc/stunnel/stunnel.pem
 MyStunnelC
 
  # setting stunnel ports
+ sed -i "s|WS_Port1|$WS_Port1|g" /etc/stunnel/stunnel.conf
+ sed -i "s|WS_Port2|$WS_Port2|g" /etc/stunnel/stunnel.conf
+ sed -i "s|MyOvpnPort3|$OpenVPN_Port3|g" /etc/stunnel/stunnel.conf
  sed -i "s|Stunnel_Port1|$Stunnel_Port1|g" /etc/stunnel/stunnel.conf
  sed -i "s|dropbear_port_c|$(netstat -tlnp | grep -i dropbear | awk '{print $4}' | cut -d: -f2 | xargs | awk '{print $2}' | head -n1)|g" /etc/stunnel/stunnel.conf
  sed -i "s|Stunnel_Port2|$Stunnel_Port2|g" /etc/stunnel/stunnel.conf
@@ -1173,5 +1182,5 @@ fi
  # Clearing all logs from installation
  rm -rf /root/.bash_history && history -c && echo '' > /var/log/syslog
 
-rm -f xamjyss-vps-ws.sh*
+rm -f Ubuntu-VPS-Installer*
 exit 1
