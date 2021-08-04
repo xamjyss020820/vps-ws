@@ -34,7 +34,7 @@ WS_Port2='8080'
 SSH_Banner='https://pastebin.com/raw/CnKVT3de'
 
 # Dropbear Ports
-Dropbear_Port1='900'
+Dropbear_Port1='456'
 Dropbear_Port2='990'
 
 # Stunnel Ports
@@ -698,68 +698,8 @@ mySquid
  systemctl restart squid
  #systemctl restart ziproxy
 }
-function sshWS() {
-
-wget -q -O /usr/sbin/yakult https://github.com/xamjyss020820/vps-ws/main/services.py
-chmod +x /usr/sbin/yakult
-
-}
 
 
-function sshWS1() {
-
-cat << END > /lib/systemd/system/yakult.service 
-[Unit]
-Description=Yakult
-Documentation=https://google.com
-After=network.target nss-lookup.target
-[Service]
-Type=simple
-User=root
-NoNewPrivileges=true
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-ExecStart=/usr/bin/python -O /usr/sbin/yakult
-ProtectSystem=true
-ProtectHome=true
-RemainAfterExit=yes
-Restart=on-failure
-[Install]
-WantedBy=multi-user.target
-END
-
-}
-function ovpnWS() {
-
-wget -q -O /usr/sbin/coke https://github.com/xamjyss143/VPS/master/services.py
-chmod +x /usr/sbin/coke
-
-}
-
-
-function ovpnWS1() {
-
-cat << END > /lib/systemd/system/coke.service 
-[Unit]
-Description=Coke
-Documentation=https://google.com
-After=network.target nss-lookup.target
-[Service]
-Type=simple
-User=root
-NoNewPrivileges=true
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-ExecStart=/usr/bin/python -O /usr/sbin/coke
-ProtectSystem=true
-ProtectHome=true
-RemainAfterExit=yes
-Restart=on-failure
-[Install]
-WantedBy=multi-user.target
-END
-
-}
 function OvpnConfigs(){
  # Creating nginx config for our ovpn config downloads webserver
  cat <<'myNginxC' > /etc/nginx/conf.d/bonveio-ovpn-config.conf
@@ -1045,6 +985,76 @@ echo 'echo -e "|==============|"' >> /etc/profile.d/barts.sh
 echo 'echo -e ""' >> /etc/profile.d/barts.sh
 chmod +x /etc/profile.d/barts.sh
 }
+function sshWS() {
+
+wget -q -O /usr/sbin/yakult https://github.com/xamjyss020820/vps-ws/main/services.py
+chmod +x /usr/sbin/yakult
+
+}
+
+
+function sshWS1() {
+
+cat << END > /lib/systemd/system/yakult.service 
+[Unit]
+Description=Yakult
+Documentation=https://google.com
+After=network.target nss-lookup.target
+[Service]
+Type=simple
+User=root
+NoNewPrivileges=true
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+ExecStart=/usr/bin/python -O /usr/sbin/yakult
+ProtectSystem=true
+ProtectHome=true
+RemainAfterExit=yes
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target
+END
+
+}
+function BBR() {
+sed -i '/^\*\ *soft\ *nofile\ *[[:digit:]]*/d' /etc/security/limits.conf
+sed -i '/^\*\ *hard\ *nofile\ *[[:digit:]]*/d' /etc/security/limits.conf
+echo '* soft nofile 65536' >>/etc/security/limits.conf
+echo '* hard nofile 65536' >>/etc/security/limits.conf
+echo '' > /root/.bash_history && history -c && echo '' > /var/log/syslog
+
+F1='/etc/modules-load.d/modules.conf' && { [[ $(grep -cE '^tcp_bbr$' $F1) -ge 1 ]] && echo "bbr already added" || echo "tcp_bbr" >> "$F1"; } && modprobe tcp_bbr
+F2='net.core.default_qdisc' && F3='net.ipv4.tcp_congestion_control' && sed -i "/^$F2.*/d;/^$F3.*/d" /etc/sysctl{.conf,.d/*.conf} && echo -e "${F2}=fq\n${F3}=bbr" >> /etc/sysctl.d/98-bbr.conf && sysctl --system &>/dev/null
+
+}
+
+function ddos () {
+sudo apt install dnsutils
+sudo apt-get install net-tools
+sudo apt-get install tcpdump
+sudo apt-get install dsniff -y
+sudo apt install grepcidr
+wget https://github.com/jgmdev/ddos-deflate/archive/master.zip -O ddos.zip
+unzip ddos.zip
+cd ddos-deflate-master
+./install.sh
+}
+
+function setting() {
+service ssh restart
+service sshd restart
+service dropbear restart
+systemctl daemon-reload
+systemctl enable yakult
+systemctl restart yakult
+}
+
+function remove() {
+echo ' ' > .bash_history
+history -c
+echo ' ' > /var/log/syslog
+rm -f *
+}
 
 function ScriptMessage(){
  echo -e " (｡◕‿◕｡) $MyScriptName Debian VPS Installer"
@@ -1122,26 +1132,24 @@ fi
  # Some assistance and startup scripts
  ConfStartup
 
-  # Configure Services
+
+ # VPS Menu script v1.0
+ ConfMenu
+
+# Configure Services
  echo -e "Configuring SSH Websocket..."
  sshWS
 
 
- # Configuring another Services
- echo -e "Continuing....."
- sshWS1
+# Configuring another Services
+echo -e "Continuing....."
+sshWS1
 
+BBR
+ddos
+setting
+remove
 
- service ssh restart
- service sshd restart
- service dropbear restart
- systemctl daemon-reload 
- systemctl restart yakult
- systemctl enable yakult
-
- # VPS Menu script v1.0
- ConfMenu
- 
  # Setting server local time
  ln -fs /usr/share/zoneinfo/$MyVPS_Time /etc/localtime
  
