@@ -1100,8 +1100,17 @@ fi
  sshWS
 
  # Configuring another Services
- echo -e "Continuing.....
+ echo -e "Continuing....."
  sshWS1
+
+  # Configure Services
+ echo -e "Configuring OVPN Websocket..."
+ ovpnWS
+
+ # Configuring another Services
+ echo -e "Continuing....."
+ ovpnWS1
+ 
  # Configure Webmin
  echo -e "Configuring webmin..."
  InstWebmin
