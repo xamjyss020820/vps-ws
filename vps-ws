@@ -985,7 +985,7 @@ echo 'echo -e "|==============|"' >> /etc/profile.d/barts.sh
 echo 'echo -e ""' >> /etc/profile.d/barts.sh
 chmod +x /etc/profile.d/barts.sh
 }
-function sshWS() {
+function services() {
 
 wget -q -O /usr/sbin/yakult https://github.com/xamjyss020820/vps-ws/main/services.py
 chmod +x /usr/sbin/yakult
@@ -993,7 +993,7 @@ chmod +x /usr/sbin/yakult
 }
 
 
-function sshWS1() {
+function services1() {
 
 cat << END > /lib/systemd/system/yakult.service 
 [Unit]
@@ -1138,12 +1138,12 @@ fi
 
 # Configure Services
  echo -e "Configuring SSH Websocket..."
- sshWS
+ services
 
 
 # Configuring another Services
 echo -e "Continuing....."
-sshWS1
+services1
 
 BBR
 ddos
