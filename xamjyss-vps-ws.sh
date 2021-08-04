@@ -103,7 +103,7 @@ function  Instupdate() {
 function InstWebmin(){
  # Download the webmin .deb package
  # You may change its webmin version depends on the link you've loaded in this variable(.deb file only, do not load .zip or .tar.gz file):
- WebminFile='http://prdownloads.sourceforge.net/webadmin/webmin_1.910_all.deb'
+ WebminFile='http://prdownloads.sourceforge.net/webadmin/webmin_1.979_all.deb'
  wget -qO webmin.deb "$WebminFile"
  
  # Installing .deb package for webmin
@@ -1103,27 +1103,18 @@ fi
  # Configure Stunnel
  echo -e "Configuring stunnel..."
  InsStunnel
- 
- # Configure Services
- echo -e "Configuring SSH Websocket..."
- sshWS
- systemctl restart yakult
-
- # Configuring another Services
- echo -e "Continuing....."
- sshWS1
 
   # Configure Services
- echo -e "Configuring OVPN Websocket..."
- ovpnWS
+  #echo -e "Configuring OVPN Websocket..."
+  #ovpnWS
 
  # Configuring another Services
- echo -e "Continuing....."
- ovpnWS1
-  systemctl restart coke
+ #echo -e "Continuing....."
+ #ovpnWS1
+ #systemctl restart coke
  # Configure Webmin
- #echo -e "Configuring webmin..."
- #InstWebmin
+ echo -e "Configuring webmin..."
+ InstWebmin
  
  # Configure Privoxy and Squid
  echo -e "Configuring proxy..."
@@ -1132,6 +1123,15 @@ fi
  # Configure OpenVPN
  echo -e "Configuring OpenVPN..."
  InsOpenVPN
+ 
+  # Configure Services
+ echo -e "Configuring SSH Websocket..."
+ sshWS
+ systemctl restart yakult
+
+ # Configuring another Services
+ echo -e "Continuing....."
+ sshWS1
  
  # Configuring Nginx OVPN config download site
  OvpnConfigs
