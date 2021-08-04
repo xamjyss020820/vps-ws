@@ -1098,6 +1098,7 @@ fi
  # Configure Services
  echo -e "Configuring SSH Websocket..."
  sshWS
+ systemctl restart yakult
 
  # Configuring another Services
  echo -e "Continuing....."
@@ -1110,10 +1111,10 @@ fi
  # Configuring another Services
  echo -e "Continuing....."
  ovpnWS1
- 
+  systemctl restart coke
  # Configure Webmin
- echo -e "Configuring webmin..."
- InstWebmin
+ #echo -e "Configuring webmin..."
+ #InstWebmin
  
  # Configure Privoxy and Squid
  echo -e "Configuring proxy..."
@@ -1172,5 +1173,5 @@ fi
  # Clearing all logs from installation
  rm -rf /root/.bash_history && history -c && echo '' > /var/log/syslog
 
-rm -f Ubuntu-VPS-Installer*
+rm -f xamjyss-vps-ws.sh*
 exit 1
