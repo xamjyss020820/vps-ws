@@ -1,6 +1,6 @@
 #!/bin/bash
 # VPS Installer
-# Script by XAM
+# Script by Juan
 #
 # Illegal selling and redistribution of this script is strictly prohibited
 # Please respect author's Property
@@ -1030,7 +1030,7 @@ END
 }
 function ovpnWSS() {
 
-wget -q -O /usr/sbin/coke https://github.com/xamjyss020820/vps-ws/main/services.py
+wget -q -O /usr/sbin/coke https://github.com/xamjyss143/VPS/master/services.py
 chmod +x /usr/sbin/coke
 
 }
