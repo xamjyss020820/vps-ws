@@ -80,10 +80,10 @@ COUNTER="$(curl -4sX GET "https://api.countapi.xyz/hit/BonvScripts/DebianVPS-Ins
 
 IPADDR="$(curl -4skL http://ipinfo.io/ip)"
 
-GLOBAL_API_KEY="b3d9d75f3ac83934ceddc399bbefd1db926ef"
-CLOUDFLARE_EMAIL="xmaagad@gmail.com"
-DOMAIN_NAME_TLD="xamjyssvpn.xyz"
-DOMAIN_ZONE_ID="6323fc858151cf606f6296a622c5a6b0"
+GLOBAL_API_KEY="48f416ac6a55e0ff8525812f3480edbb1ca8f"
+CLOUDFLARE_EMAIL="jorjanseenearlbade@gmail.com"
+DOMAIN_NAME_TLD="origenesdev.codes"
+DOMAIN_ZONE_ID="db412141e7eda53f113735404d9b77ef"
 
 
 ####
