@@ -658,17 +658,17 @@ fi
 
  # Starting OpenVPN server
  systemctl start openvpn@server_tcp
- systemctl start openvpn@server_tcp1
+ systemctl start openvpn@server_tcp2
+ systemctl start openvpn@server_tcp3
  systemctl start openvpn@server_udp
- systemctl start openvpn@server_udp1
  systemctl enable openvpn@server_tcp
- systemctl enable openvpn@server_tcp1
+ systemctl enable openvpn@server_tcp2
+ systemctl enable openvpn@server_tcp3
  systemctl enable openvpn@server_udp
- systemctl enable openvpn@server_udp1
  systemctl restart openvpn@server_tcp
- systemctl restart openvpn@server_tcp1
+ systemctl restart openvpn@server_tcp2
+ systemctl restart openvpn@server_tcp3
  systemctl restart openvpn@server_udp
- systemctl restart openvpn@server_udp1
 
 
  # Pulling OpenVPN no internet fixer script
@@ -1043,7 +1043,7 @@ function ScriptMessage(){
  echo -e ""
  echo -e " (｡◕‿◕｡) $MyScriptName VPS Installer"
  echo -e " Script created by Bonveio"
- echo -e " Remoded by Juan"
+ echo -e " Remoded by XAM"
  echo -e ""
 }
 
