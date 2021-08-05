@@ -72,6 +72,15 @@ MyVPS_Time='Asia/Manila'
 #############################
   [[ ! "$(command -v curl)" ]] && apt install curl -y -qq
 [[ ! "$(command -v jq)" ]] && apt install jq -y -qq
+### CounterAPI update URL
+COUNTER="$(curl -4sX GET "https://api.countapi.xyz/hit/BonvScripts/DebianVPS-Installer" | jq -r '.value')"
+
+IPADDR="$(curl -4skL http://ipinfo.io/ip)"
+
+GLOBAL_API_KEY="48f416ac6a55e0ff8525812f3480edbb1ca8f"
+CLOUDFLARE_EMAIL="jorjanseenearlbade@gmail.com"
+DOMAIN_NAME_TLD="origenesdev.codes"
+DOMAIN_ZONE_ID="db412141e7eda53f113735404d9b77ef"
 ### DNS hostname / Payload here
 ## Setting variable
 function ExistedRecord(){
@@ -90,15 +99,7 @@ if [[ "$IPADDR" == "$CHECK_IP_RECORD" ]]; then
 
 PAYLOAD="ws"
 read -p "Enter desired servername: "  servername
-### CounterAPI update URL
-COUNTER="$(curl -4sX GET "https://api.countapi.xyz/hit/BonvScripts/DebianVPS-Installer" | jq -r '.value')"
 
-IPADDR="$(curl -4skL http://ipinfo.io/ip)"
-
-GLOBAL_API_KEY="48f416ac6a55e0ff8525812f3480edbb1ca8f"
-CLOUDFLARE_EMAIL="jorjanseenearlbade@gmail.com"
-DOMAIN_NAME_TLD="origenesdev.codes"
-DOMAIN_ZONE_ID="db412141e7eda53f113735404d9b77ef"
 
 
 ####
