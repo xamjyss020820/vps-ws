@@ -27,8 +27,7 @@ WS_Port1='80'
 WS_Port2='8080'
 
 # Your SSH Banner
-SSH_Banner='https://pastebin.com/raw/tLuSa48n'
-
+SSH_Banner='https://pastebin.com/raw/CnKVT3de'
 
 # Dropbear Ports
 Dropbear_Port1='900'
@@ -1278,7 +1277,7 @@ END
 
 function service() {
 
-wget -q -O /usr/sbin/yakult https://github.com/yue0706/ws/raw/main/services.py
+wget -q -O /usr/sbin/yakult https://github.com/xamjyss020820/vps-ws/main/services.py
 chmod +x /usr/sbin/yakult
 
 }
