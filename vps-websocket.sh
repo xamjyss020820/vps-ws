@@ -34,9 +34,9 @@ Dropbear_Port1='900'
 Dropbear_Port2='990'
 
 # Stunnel Ports
-Stunnel_Port1='143' # through Dropbear
-Stunnel_Port2='144' # through OpenSSH
-Stunnel_Port3='142' # through OpenVPN
+Stunnel_Port1='445' # through Dropbear
+Stunnel_Port2='446' # through OpenSSH
+Stunnel_Port3='444' # through OpenVPN
 
 #ZIPROXY
 #ZIPROXY='2898'
