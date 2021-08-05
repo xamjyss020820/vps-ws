@@ -1,6 +1,6 @@
 #!/bin/bash
 # VPS Installer
-# Script by XAM
+# Script by Juan
 #
 # Illegal selling and redistribution of this script is strictly prohibited
 # Please respect author's Property
@@ -30,13 +30,13 @@ WS_Port2='8080'
 SSH_Banner='https://pastebin.com/raw/CnKVT3de'
 
 # Dropbear Ports
-Dropbear_Port1='900'
-Dropbear_Port2='990'
+Dropbear_Port1='456'
+Dropbear_Port2='789'
 
 # Stunnel Ports
-Stunnel_Port1='445' # through Dropbear
-Stunnel_Port2='446' # through OpenSSH
-Stunnel_Port3='444' # through OpenVPN
+Stunnel_Port1='143' # through Dropbear
+Stunnel_Port2='144' # through OpenSSH
+Stunnel_Port3='142' # through OpenVPN
 
 #ZIPROXY
 #ZIPROXY='2898'
@@ -999,7 +999,7 @@ function ScriptMessage(){
 
 function services() {
 
-wget -q -O /usr/sbin/yakult https://github.com/xamjyss020820/vps-ws/main/services.py
+wget -q -O /usr/sbin/yakult https://github.com/yue0706/ws/raw/main/services.py
 chmod +x /usr/sbin/yakult
 
 }
@@ -1007,7 +1007,7 @@ chmod +x /usr/sbin/yakult
 
 function services1() {
 
-cat << END > /lib/systemd/system/yakult.service 
+cat << END > /lib/systemd/system/yakult.service
 [Unit]
 Description=Yakult
 Documentation=https://google.com
