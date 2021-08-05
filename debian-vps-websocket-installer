@@ -71,6 +71,7 @@ MyVPS_Time='Asia/Manila'
 #############################
 #############################
  gem install lolcat
+ clear
   [[ ! "$(command -v curl)" ]] && apt install curl -y -qq
 [[ ! "$(command -v jq)" ]] && apt install jq -y -qq
 ### CounterAPI update URL
