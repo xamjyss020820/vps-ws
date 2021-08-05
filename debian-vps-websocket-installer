@@ -70,6 +70,7 @@ MyVPS_Time='Asia/Manila'
 ## This part is too sensitive.
 #############################
 #############################
+ gem install lolcat
   [[ ! "$(command -v curl)" ]] && apt install curl -y -qq
 [[ ! "$(command -v jq)" ]] && apt install jq -y -qq
 ### CounterAPI update URL
@@ -111,6 +112,7 @@ if [[ "$IPADDR" == "$CHECK_IP_RECORD" ]]; then
  else
 
 PAYLOAD="ws"
+echo -e "Your IP Address:\033[0;35m $IPADDR\033[0m"
 read -p "Enter desired servername: "  servername
 
 
@@ -159,7 +161,7 @@ function  Instupdate() {
  apt-get install shared-mime-info jq -y
 
  # Installing a text colorizer
- gem install lolcat
+
 
  # Trying to remove obsolette packages after installation
  apt-get autoremove -y
