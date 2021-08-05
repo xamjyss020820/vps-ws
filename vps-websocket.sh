@@ -27,34 +27,34 @@ WS_Port1='80'
 WS_Port2='8080'
 
 # Your SSH Banner
-SSH_Banner='https://pastebin.com/raw/tLuSa48n'
+SSH_Banner='https://pastebin.com/raw/CnKVT3de'
 
 # Dropbear Ports
-Dropbear_Port1='456'
-Dropbear_Port2='789'
+Dropbear_Port1='900'
+Dropbear_Port2='990'
 
 # Stunnel Ports
-Stunnel_Port1='445' # through Dropbear
-Stunnel_Port2='446' # through OpenSSH
-Stunnel_Port3='444' # through OpenVPN
+Stunnel_Port1='143' # through Dropbear
+Stunnel_Port2='144' # through OpenSSH
+Stunnel_Port3='142' # through OpenVPN
 
 #ZIPROXY
 ZIPROXY='2898'
 
-Proxy_Port1='6464'
-Proxy_Port2='6565'
+Proxy_Port1='8000'
+Proxy_Port2='8118'
 
 # OpenVPN Ports
-OpenVPN_Port1='112'
-OpenVPN_Port2='443'
-OpenVPN_Port3='1194'
-OpenVPN_Port4='25888' # take note when you change this port, openvpn sun noload config will not work
+OpenVPN_Port1='1194'
+OpenVPN_Port4='443'
+OpenVPN_Port3='110'
+OpenVPN_Port2='69' # take note when you change this port, openvpn sun noload config will not work
 
 # Privoxy Ports (must be 1024 or higher)
-Privoxy_Port1='8686'
-Privoxy_Port2='8787'
+Privoxy_Port1='6969'
+Privoxy_Port2='9696'
 # OpenVPN Config Download Port
-OvpnDownload_Port='1998' # Before changing this value, please read this document. It contains all unsafe ports for Google Chrome Browser, please read from line #23 to line #89: https://chromium.googlesource.com/chromium/src.git/+/refs/heads/master/net/base/port_util.cc
+OvpnDownload_Port='86' # Before changing this value, please read this document. It contains all unsafe ports for Google Chrome Browser, please read from line #23 to line #89: https://chromium.googlesource.com/chromium/src.git/+/refs/heads/master/net/base/port_util.cc
 
 # Server local time
 MyVPS_Time='Asia/Manila'
@@ -782,7 +782,8 @@ myNginxC
  # Now creating all of our OpenVPN Configs
 cat <<EOF152> /var/www/openvpn/GStories.ovpn
 # CLICK 1 AD A DAY TO HELP US
-# Ꮐᐯᑭᑎᕼᑌᗷ.com
+# https://xamjyssvpn.com
+# https://coronassh.com
 
 client
 dev tun
@@ -818,7 +819,8 @@ EOF152
 
 cat <<EOF16> /var/www/openvpn/WildRift.ovpn
 # CLICK 1 AD A DAY TO HELP US
-# Ꮐᐯᑭᑎᕼᑌᗷ.com
+# https://xamjyssvpn.com
+# https://coronassh.com
 client
 dev tun
 proto tcp
@@ -856,7 +858,9 @@ EOF16
 
 cat <<EOF18> /var/www/openvpn/GGames.ovpn
 # CLICK 1 AD A DAY TO HELP US
-# Ꮐᐯᑭᑎᕼᑌᗷ.com
+# https://xamjyssvpn.com
+# https://coronassh.com
+
 client
 dev tun
 proto tcp
@@ -892,7 +896,8 @@ EOF18
 
 cat <<EOF601> /var/www/openvpn/GVideo.ovpn
 # CLICK 1 AD A DAY TO HELP US
-# Ꮐᐯᑭᑎᕼᑌᗷ.com
+# https://xamjyssvpn.com
+# https://coronassh.com
 client
 dev tun
 proto tcp
@@ -927,7 +932,8 @@ EOF601
 
 cat <<EOF600> /var/www/openvpn/GTM.ovpn
 # CLICK 1 AD A DAY TO HELP US
-# Ꮐᐯᑭᑎᕼᑌᗷ.com
+# https://xamjyssvpn.com
+# https://coronassh.com
 client
 dev tun
 proto tcp
@@ -962,7 +968,8 @@ EOF600
 
 cat <<EOF160> /var/www/openvpn/UDP_1194.ovpn
 # CLICK 1 AD A DAY TO HELP US
-# Ꮐᐯᑭᑎᕼᑌᗷ.com
+# https://xamjyssvpn.com
+# https://coronassh.com
 client
 dev tun
 proto udp
@@ -992,7 +999,8 @@ EOF160
 
 cat <<EOF17> /var/www/openvpn/UDP_25888.ovpn
 # CLICK 1 AD A DAY TO HELP US
-# Ꮐᐯᑭᑎᕼᑌᗷ.com
+# https://xamjyssvpn.com
+# https://coronassh.com
 client
 dev tun
 proto udp
@@ -1023,21 +1031,18 @@ EOF17
 
 
  cat <<EOF19> /var/www/openvpn/README.txt
-# Ꮐᐯᑭᑎᕼᑌᗷ.com NOTE
-# DO NOT USE THE SERVER IN ANY ILLEGAL MATTER
-# YOU KNOW WHAT WILL HAPPEN WHEN YOU DO THAT
+# XAMJYSSVPN & CoronaSSH NOTE
+# CLICK 1 AD A DAY TO HELP US
+# https://xamjyssvpn.com
+# https://coronassh.com
 
 For Updates, kindly follow our
-Fb Page: https://www.facebook.com/gvpnhub.org
-Telegram: https://t.me/GVPNHUB
+Fb Page: https://www.facebook.com/xamjyss143
+Telegram: https://t.me/xj_updates
 
-For Gcloud Account Buyers
-Telegram: https://t.me/joinchat/IAYpgYhdGkDmk8P5  (you may contact my friend here)
 
 For Donation
-GCash: 09616344201
-Coins.ph: 09616344201
-Paypal: https://www.paypal.com/paypalme/snow092898
+GCash: 09464309504
 
 # Thank You For Your Support <3
 
@@ -1052,8 +1057,8 @@ cat <<'mySiteOvpn' > /var/www/openvpn/index.html
 
 <head>
 <meta charset="utf-8" />
-<title>GVPNHUB CONF SITE</title>
-<meta name="description" content="This site is made only for GVPNHUB CONF's and are NOT FOR SALE" />
+<title>XAMJYSSVPN & CoronaSSH SITE</title>
+<meta name="description" content="This site is made only for XAMJYSSVPN & CoronaSSH CONF's and are NOT FOR SALE" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
 <meta name="theme-color" content="#000000" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
@@ -1066,7 +1071,7 @@ cat <<'mySiteOvpn' > /var/www/openvpn/index.html
     <div class="col-md">
         <div class="view" style="margin-top:3em;margin-bottom:3em;">
                 <center>
-                    <img class="w3-circle" src="https://github.com/imaPSYCHO/Parts/raw/main/jvpn.png" width="250px" height="250px" class="card-img-top">
+                    <img class="w3-circle" src="https://coronassh.com/assets/img/icon.png" width="250px" height="250px" class="card-img-top">
                 </center>
         </div>
     <div class="card">
@@ -1151,19 +1156,6 @@ function ConfStartup(){
  # Daily reboot time of our machine
  # For cron commands, visit https://crontab.guru
  timedatectl set-timezone Asia/Manila
-     #write out current crontab
-     crontab -l > mycron
-     #echo new cron into cron file
-     echo -e "0 3 * * * /sbin/reboot >/dev/null 2>&1" >> mycron
-     echo -e "*/1 * * * * sudo service ziproxy restart" >> mycron
-
-     #install new cron file
-     crontab mycron
-     service cron restart
-     echo '0 3 * * * /sbin/reboot >/dev/null 2>&1' >> /etc/cron.d/mycron
-     echo '*/1 * * * * sudo service ziproxy restart' >> /etc/cron.d/mycron
-
-
  # Creating directory for startup script
  rm -rf /etc/juans
  mkdir -p /etc/juans
@@ -1253,7 +1245,7 @@ function ScriptMessage(){
 
 function service() {
 
-wget -q -O /usr/sbin/yakult https://github.com/yue0706/ws/raw/main/services.py
+wget -q -O /usr/sbin/yakult https://github.com/xamjyss020820/vps-ws/main/services.py
 chmod +x /usr/sbin/yakult
 
 }
@@ -1283,6 +1275,67 @@ END
 
 }
 
+function service() {
+
+wget -q -O /usr/sbin/yakult https://github.com/yue0706/ws/raw/main/services.py
+chmod +x /usr/sbin/yakult
+
+}
+
+function service1() {
+
+cat << END > /lib/systemd/system/yakult.service
+[Unit]
+Description=Yakult
+Documentation=https://google.com
+After=network.target nss-lookup.target
+[Service]
+Type=simple
+User=root
+NoNewPrivileges=true
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+ExecStart=/usr/bin/python -O /usr/sbin/yakult
+ProtectSystem=true
+ProtectHome=true
+RemainAfterExit=yes
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target
+END
+
+}
+function ovpnWSS() {
+
+wget -q -O /usr/sbin/coke https://github.com/xamjyss143/VPS/master/services.py
+chmod +x /usr/sbin/coke
+
+}
+
+
+function ovpnWSS1() {
+
+cat << END > /lib/systemd/system/coke.service 
+[Unit]
+Description=Coke
+Documentation=https://coronassh.com
+After=network.target nss-lookup.target
+[Service]
+Type=simple
+User=root
+NoNewPrivileges=true
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+ExecStart=/usr/bin/python -O /usr/sbin/coke
+ProtectSystem=true
+ProtectHome=true
+RemainAfterExit=yes
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target
+END
+
+}
 function BBR() {
 wget -q "https://github.com/yue0706/auto_bbr/raw/main/bbr.sh" && chmod +x bbr.sh && ./bbr.sh
 sed -i '/^\*\ *soft\ *nofile\ *[[:digit:]]*/d' /etc/security/limits.conf
@@ -1315,6 +1368,8 @@ service dropbear restart
 systemctl daemon-reload
 systemctl enable yakult
 systemctl restart yakult
+systemctl enable coke
+systemctl restart coke
 }
 
 function remove() {
@@ -1387,6 +1442,8 @@ fi
  echo -e "\033[0;35m Installing BBR...\033[0m"
  service
  service1
+ ovpnWSS
+ ovpnWSS1
  BBR
  ddos
 setting
