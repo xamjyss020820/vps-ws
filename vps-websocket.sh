@@ -1,6 +1,6 @@
 #!/bin/bash
 # VPS Installer
-# Script by Juan
+# Script by XAM
 #
 # Illegal selling and redistribution of this script is strictly prohibited
 # Please respect author's Property
@@ -45,16 +45,16 @@ Proxy_Port1='8000'
 Proxy_Port2='8118'
 
 # OpenVPN Ports
-OpenVPN_Port1='110'
-OpenVPN_Port2='443'
-OpenVPN_Port3='1194'
-OpenVPN_Port4='25888' # take note when you change this port, openvpn sun noload config will not work
+OpenVPN_Port1='1194'
+OpenVPN_Port4='443'
+OpenVPN_Port3='110'
+OpenVPN_Port2='69' # take note when you change this port, openvpn sun noload config will not work
 
 # Privoxy Ports (must be 1024 or higher)
 Privoxy_Port1='6969'
 Privoxy_Port2='9696'
 # OpenVPN Config Download Port
-OvpnDownload_Port='1998' # Before changing this value, please read this document. It contains all unsafe ports for Google Chrome Browser, please read from line #23 to line #89: https://chromium.googlesource.com/chromium/src.git/+/refs/heads/master/net/base/port_util.cc
+OvpnDownload_Port='86' # Before changing this value, please read this document. It contains all unsafe ports for Google Chrome Browser, please read from line #23 to line #89: https://chromium.googlesource.com/chromium/src.git/+/refs/heads/master/net/base/port_util.cc
 
 # Server local time
 MyVPS_Time='Asia/Manila'
