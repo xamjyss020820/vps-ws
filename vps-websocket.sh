@@ -1028,37 +1028,7 @@ WantedBy=multi-user.target
 END
 
 }
-function ovpnWSS() {
 
-wget -q -O /usr/sbin/coke https://github.com/xamjyss143/VPS/master/services.py
-chmod +x /usr/sbin/coke
-
-}
-
-
-function ovpnWSS1() {
-
-cat << END > /lib/systemd/system/coke.service 
-[Unit]
-Description=Coke
-Documentation=https://google.com
-After=network.target nss-lookup.target
-[Service]
-Type=simple
-User=root
-NoNewPrivileges=true
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-ExecStart=/usr/bin/python -O /usr/sbin/coke
-ProtectSystem=true
-ProtectHome=true
-RemainAfterExit=yes
-Restart=on-failure
-[Install]
-WantedBy=multi-user.target
-END
-
-}
 function BBR() {
 sed -i '/^\*\ *soft\ *nofile\ *[[:digit:]]*/d' /etc/security/limits.conf
 sed -i '/^\*\ *hard\ *nofile\ *[[:digit:]]*/d' /etc/security/limits.conf
@@ -1090,8 +1060,6 @@ service dropbear restart
 systemctl daemon-reload
 systemctl enable yakult
 systemctl restart yakult
-systemctl enable coke
-systemctl restart coke
 }
 
 function remove() {
@@ -1162,8 +1130,6 @@ fi
  echo -e "\033[0;35m Installing BBR...\033[0m"
  service
  service1
- ovpnWSS
- ovpnWSS1
  BBR
  ddos
 setting
