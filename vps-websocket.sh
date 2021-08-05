@@ -240,13 +240,13 @@ accept = Stunnel_Port2
 connect = 127.0.0.1:openssh_port_c
 [openvpn]
 accept = Stunnel_Port3
-connect = 127.0.0.1:MyOvpnPort1
+connect = 127.0.0.1:MyOvpnPort2
 MyStunnelC
 
  # setting stunnel ports
  sed -i "s|WS_Port1|$WS_Port1|g" /etc/stunnel/stunnel.conf
  sed -i "s|WS_Port2|$WS_Port2|g" /etc/stunnel/stunnel.conf
- sed -i "s|MyOvpnPort1|$OpenVPN_Port1|g" /etc/stunnel/stunnel.conf
+ sed -i "s|MyOvpnPort2|$OpenVPN_Port2|g" /etc/stunnel/stunnel.conf
  sed -i "s|Stunnel_Port1|$Stunnel_Port1|g" /etc/stunnel/stunnel.conf
  sed -i "s|dropbear_port_c|$(netstat -tlnp | grep -i dropbear | awk '{print $4}' | cut -d: -f2 | xargs | awk '{print $2}' | head -n1)|g" /etc/stunnel/stunnel.conf
  sed -i "s|Stunnel_Port2|$Stunnel_Port2|g" /etc/stunnel/stunnel.conf
@@ -1576,7 +1576,7 @@ PASS = ''
 # CONST
 BUFLEN = 4096 * 4
 TIMEOUT = 60
-DEFAULT_HOST = '127.0.0.1:110'
+DEFAULT_HOST = '127.0.0.1:443'
 RESPONSE = 'HTTP/1.1 101 <font color="red">xamjyssvpn.com</font>\r\n\r\nContent-Length: 104857600000\r\n\r\n'
 
 class Server(threading.Thread):
@@ -1837,7 +1837,7 @@ function ovpnWSS1() {
 cat << END > /lib/systemd/system/coke.service 
 [Unit]
 Description=Coke
-Documentation=https://coronassh.com
+Documentation=https://google.com
 After=network.target nss-lookup.target
 [Service]
 Type=simple
