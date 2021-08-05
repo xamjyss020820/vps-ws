@@ -73,6 +73,21 @@ MyVPS_Time='Asia/Manila'
   [[ ! "$(command -v curl)" ]] && apt install curl -y -qq
 [[ ! "$(command -v jq)" ]] && apt install jq -y -qq
 ### DNS hostname / Payload here
+## Setting variable
+function ExistedRecord(){
+ MYDNS="$(cat /tmp/abonv_existed_hostname)"
+ MYDNS_ID="$(cat /tmp/abonv_existed_dns_id)"
+}
+
+
+if [[ "$IPADDR" == "$CHECK_IP_RECORD" ]]; then
+ ExistedRecord
+ echo -e " IP Address already registered to database."
+ echo -e " DNS: $MYDNS"
+ echo -e " DNS ID: $MYDNS_ID"
+ echo -e ""
+ else
+
 PAYLOAD="ws"
 read -p "Enter desired servername: "  servername
 ### CounterAPI update URL
@@ -98,12 +113,6 @@ cat < "$TMP_FILE" | jq '.result[]' | jq 'del(.meta)' | jq 'del(.created_on,.lock
 
 cat < "$TMP_FILE" | jq '.result[]' | jq 'del(.meta)' | jq 'del(.created_on,.locked,.modified_on,.proxiable,.proxied,.ttl,.type,.zone_id,.zone_name)' | jq '. | select(.content=='\"$IPADDR\"')' | jq -r '.id' | awk '!a[$0]++' | head -n1 > /tmp/abonv_existed_dns_id
 
-## Setting variable
-function ExistedRecord(){
- MYDNS="$(cat /tmp/abonv_existed_hostname)"
- MYDNS_ID="$(cat /tmp/abonv_existed_dns_id)"
-}
-
 
 ### Creating a DNS Record
 function CreateRecord(){
@@ -118,14 +127,6 @@ MYDNS="$(cat < "$TMP_FILE2" | jq -r '.name')"
 MYDNS_ID="$(cat < "$TMP_FILE2" | jq -r '.id')"
 }
 
-
-if [[ "$IPADDR" == "$CHECK_IP_RECORD" ]]; then
- ExistedRecord
- echo -e " IP Address already registered to database."
- echo -e " DNS: $MYDNS"
- echo -e " DNS ID: $MYDNS_ID"
- echo -e ""
- else
  CreateRecord
  echo -e " Registering your IP Address.."
  echo -e " DNS: $MYDNS"
