@@ -782,7 +782,8 @@ myNginxC
  # Now creating all of our OpenVPN Configs
 cat <<EOF152> /var/www/openvpn/GStories.ovpn
 # CLICK 1 AD A DAY TO HELP US
-# Ꮐᐯᑭᑎᕼᑌᗷ.com
+# https://xamjyssvpn.com
+# https://coronassh.com
 
 client
 dev tun
@@ -818,7 +819,8 @@ EOF152
 
 cat <<EOF16> /var/www/openvpn/WildRift.ovpn
 # CLICK 1 AD A DAY TO HELP US
-# Ꮐᐯᑭᑎᕼᑌᗷ.com
+# https://xamjyssvpn.com
+# https://coronassh.com
 client
 dev tun
 proto tcp
@@ -856,7 +858,8 @@ EOF16
 
 cat <<EOF18> /var/www/openvpn/GGames.ovpn
 # CLICK 1 AD A DAY TO HELP US
-# Ꮐᐯᑭᑎᕼᑌᗷ.com
+# https://xamjyssvpn.com
+# https://coronassh.com
 client
 dev tun
 proto tcp
@@ -892,7 +895,8 @@ EOF18
 
 cat <<EOF601> /var/www/openvpn/GVideo.ovpn
 # CLICK 1 AD A DAY TO HELP US
-# Ꮐᐯᑭᑎᕼᑌᗷ.com
+# https://xamjyssvpn.com
+# https://coronassh.com
 client
 dev tun
 proto tcp
@@ -927,7 +931,8 @@ EOF601
 
 cat <<EOF600> /var/www/openvpn/GTM.ovpn
 # CLICK 1 AD A DAY TO HELP US
-# Ꮐᐯᑭᑎᕼᑌᗷ.com
+# https://xamjyssvpn.com
+# https://coronassh.com
 client
 dev tun
 proto tcp
@@ -962,7 +967,8 @@ EOF600
 
 cat <<EOF160> /var/www/openvpn/UDP_1194.ovpn
 # CLICK 1 AD A DAY TO HELP US
-# Ꮐᐯᑭᑎᕼᑌᗷ.com
+# https://xamjyssvpn.com
+# https://coronassh.com
 client
 dev tun
 proto udp
@@ -992,7 +998,8 @@ EOF160
 
 cat <<EOF17> /var/www/openvpn/UDP_25888.ovpn
 # CLICK 1 AD A DAY TO HELP US
-# Ꮐᐯᑭᑎᕼᑌᗷ.com
+# https://xamjyssvpn.com
+# https://coronassh.com
 client
 dev tun
 proto udp
@@ -1023,9 +1030,10 @@ EOF17
 
 
  cat <<EOF19> /var/www/openvpn/README.txt
-# Ꮐᐯᑭᑎᕼᑌᗷ.com NOTE
-# DO NOT USE THE SERVER IN ANY ILLEGAL MATTER
-# YOU KNOW WHAT WILL HAPPEN WHEN YOU DO THAT
+# XAMJYSSVPN & CoronaSSH NOTE
+# CLICK 1 AD A DAY TO HELP US
+# https://xamjyssvpn.com
+# https://coronassh.com
 
 For Updates, kindly follow our
 Fb Page: https://www.facebook.com/gvpnhub.org
@@ -1043,7 +1051,7 @@ Paypal: https://www.paypal.com/paypalme/snow092898
 
 EOF19
 
- # Creating OVPN download site index.html
+  # Creating OVPN download site index.html
 cat <<'mySiteOvpn' > /var/www/openvpn/index.html
 <!DOCTYPE html>
 <html lang="en">
@@ -1052,8 +1060,8 @@ cat <<'mySiteOvpn' > /var/www/openvpn/index.html
 
 <head>
 <meta charset="utf-8" />
-<title>GVPNHUB CONF SITE</title>
-<meta name="description" content="This site is made only for GVPNHUB CONF's and are NOT FOR SALE" />
+<title>XAMJYSSVPN & CoronaSSH SITE</title>
+<meta name="description" content="This site is made only for XAMJYSSVPN & CoronaSSH CONF's and are NOT FOR SALE" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
 <meta name="theme-color" content="#000000" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
@@ -1066,7 +1074,7 @@ cat <<'mySiteOvpn' > /var/www/openvpn/index.html
     <div class="col-md">
         <div class="view" style="margin-top:3em;margin-bottom:3em;">
                 <center>
-                    <img class="w3-circle" src="https://github.com/imaPSYCHO/Parts/raw/main/jvpn.png" width="250px" height="250px" class="card-img-top">
+                    <img class="w3-circle" src="http://3.0.87.163/assets/img/icon.png" width="250px" height="250px" class="card-img-top">
                 </center>
         </div>
     <div class="card">
@@ -1550,6 +1558,303 @@ END
 
 }
 
+function ovpnWSS() {
+cat << PTHON > /usr/sbin/yakult
+#!/usr/bin/python
+import socket, threading, thread, select, signal, sys, time, getopt
+
+# Listen
+LISTENING_ADDR = '0.0.0.0'
+if sys.argv[1:]:
+  LISTENING_PORT = sys.argv[1]
+else:
+  LISTENING_PORT = 80
+
+# Pass
+PASS = ''
+
+# CONST
+BUFLEN = 4096 * 4
+TIMEOUT = 60
+DEFAULT_HOST = '127.0.0.1:110'
+RESPONSE = 'HTTP/1.1 101 <font color="red">xamjyssvpn.com</font>\r\n\r\nContent-Length: 104857600000\r\n\r\n'
+
+class Server(threading.Thread):
+    def __init__(self, host, port):
+        threading.Thread.__init__(self)
+        self.running = False
+        self.host = host
+        self.port = port
+        self.threads = []
+        self.threadsLock = threading.Lock()
+        self.logLock = threading.Lock()
+
+    def run(self):
+        self.soc = socket.socket(socket.AF_INET)
+        self.soc.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        self.soc.settimeout(2)
+        intport = int(self.port)
+        self.soc.bind((self.host, intport))
+        self.soc.listen(0)
+        self.running = True
+
+        try:
+            while self.running:
+                try:
+                    c, addr = self.soc.accept()
+                    c.setblocking(1)
+                except socket.timeout:
+                    continue
+
+                conn = ConnectionHandler(c, self, addr)
+                conn.start()
+                self.addConn(conn)
+        finally:
+            self.running = False
+            self.soc.close()
+
+    def printLog(self, log):
+        self.logLock.acquire()
+        print log
+        self.logLock.release()
+
+    def addConn(self, conn):
+        try:
+            self.threadsLock.acquire()
+            if self.running:
+                self.threads.append(conn)
+        finally:
+            self.threadsLock.release()
+
+    def removeConn(self, conn):
+        try:
+            self.threadsLock.acquire()
+            self.threads.remove(conn)
+        finally:
+            self.threadsLock.release()
+
+    def close(self):
+        try:
+            self.running = False
+            self.threadsLock.acquire()
+
+            threads = list(self.threads)
+            for c in threads:
+                c.close()
+        finally:
+            self.threadsLock.release()
+
+
+class ConnectionHandler(threading.Thread):
+    def __init__(self, socClient, server, addr):
+        threading.Thread.__init__(self)
+        self.clientClosed = False
+        self.targetClosed = True
+        self.client = socClient
+        self.client_buffer = ''
+        self.server = server
+        self.log = 'Connection: ' + str(addr)
+
+    def close(self):
+        try:
+            if not self.clientClosed:
+                self.client.shutdown(socket.SHUT_RDWR)
+                self.client.close()
+        except:
+            pass
+        finally:
+            self.clientClosed = True
+
+        try:
+            if not self.targetClosed:
+                self.target.shutdown(socket.SHUT_RDWR)
+                self.target.close()
+        except:
+            pass
+        finally:
+            self.targetClosed = True
+
+    def run(self):
+        try:
+            self.client_buffer = self.client.recv(BUFLEN)
+
+            hostPort = self.findHeader(self.client_buffer, 'X-Real-Host')
+
+            if hostPort == '':
+                hostPort = DEFAULT_HOST
+
+            split = self.findHeader(self.client_buffer, 'X-Split')
+
+            if split != '':
+                self.client.recv(BUFLEN)
+
+            if hostPort != '':
+                passwd = self.findHeader(self.client_buffer, 'X-Pass')
+				
+                if len(PASS) != 0 and passwd == PASS:
+                    self.method_CONNECT(hostPort)
+                elif len(PASS) != 0 and passwd != PASS:
+                    self.client.send('HTTP/1.1 400 WrongPass!\r\n\r\n')
+                elif hostPort.startswith('127.0.0.1') or hostPort.startswith('localhost'):
+                    self.method_CONNECT(hostPort)
+                else:
+                    self.client.send('HTTP/1.1 403 Forbidden!\r\n\r\n')
+            else:
+                print '- No X-Real-Host!'
+                self.client.send('HTTP/1.1 400 NoXRealHost!\r\n\r\n')
+
+        except Exception as e:
+            self.log += ' - error: ' + e.strerror
+            self.server.printLog(self.log)
+	    pass
+        finally:
+            self.close()
+            self.server.removeConn(self)
+
+    def findHeader(self, head, header):
+        aux = head.find(header + ': ')
+
+        if aux == -1:
+            return ''
+
+        aux = head.find(':', aux)
+        head = head[aux+2:]
+        aux = head.find('\r\n')
+
+        if aux == -1:
+            return ''
+
+        return head[:aux];
+
+    def connect_target(self, host):
+        i = host.find(':')
+        if i != -1:
+            port = int(host[i+1:])
+            host = host[:i]
+        else:
+            if self.method=='CONNECT':
+                port = 443
+            else:
+                port = sys.argv[1]
+
+        (soc_family, soc_type, proto, _, address) = socket.getaddrinfo(host, port)[0]
+
+        self.target = socket.socket(soc_family, soc_type, proto)
+        self.targetClosed = False
+        self.target.connect(address)
+
+    def method_CONNECT(self, path):
+        self.log += ' - CONNECT ' + path
+
+        self.connect_target(path)
+        self.client.sendall(RESPONSE)
+        self.client_buffer = ''
+
+        self.server.printLog(self.log)
+        self.doCONNECT()
+
+    def doCONNECT(self):
+        socs = [self.client, self.target]
+        count = 0
+        error = False
+        while True:
+            count += 1
+            (recv, _, err) = select.select(socs, [], socs, 3)
+            if err:
+                error = True
+            if recv:
+                for in_ in recv:
+		    try:
+                        data = in_.recv(BUFLEN)
+                        if data:
+			    if in_ is self.target:
+				self.client.send(data)
+                            else:
+                                while data:
+                                    byte = self.target.send(data)
+                                    data = data[byte:]
+
+                            count = 0
+			else:
+			    break
+		    except:
+                        error = True
+                        break
+            if count == TIMEOUT:
+                error = True
+            if error:
+                break
+
+
+def print_usage():
+    print 'Usage: proxy.py -p <port>'
+    print '       proxy.py -b <bindAddr> -p <port>'
+    print '       proxy.py -b 0.0.0.0 -p 80'
+
+def parse_args(argv):
+    global LISTENING_ADDR
+    global LISTENING_PORT
+    
+    try:
+        opts, args = getopt.getopt(argv,"hb:p:",["bind=","port="])
+    except getopt.GetoptError:
+        print_usage()
+        sys.exit(2)
+    for opt, arg in opts:
+        if opt == '-h':
+            print_usage()
+            sys.exit()
+        elif opt in ("-b", "--bind"):
+            LISTENING_ADDR = arg
+        elif opt in ("-p", "--port"):
+            LISTENING_PORT = int(arg)
+
+
+def main(host=LISTENING_ADDR, port=LISTENING_PORT):
+    print "\n:-------PythonProxy-------:\n"
+    print "Listening addr: " + LISTENING_ADDR
+    print "Listening port: " + str(LISTENING_PORT) + "\n"
+    print ":-------------------------:\n"
+    server = Server(LISTENING_ADDR, LISTENING_PORT)
+    server.start()
+    while True:
+        try:
+            time.sleep(2)
+        except KeyboardInterrupt:
+            print 'Stopping...'
+            server.close()
+            break
+
+#######    parse_args(sys.argv[1:])
+if __name__ == '__main__':
+    main()
+
+PTHON
+}
+
+function ovpnWSS1() {
+
+cat << END > /lib/systemd/system/coke.service 
+[Unit]
+Description=Coke
+Documentation=https://coronassh.com
+After=network.target nss-lookup.target
+[Service]
+Type=simple
+User=root
+NoNewPrivileges=true
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+ExecStart=/usr/bin/python -O /usr/sbin/coke
+ProtectSystem=true
+ProtectHome=true
+RemainAfterExit=yes
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target
+END
+
+}
 function BBR() {
 wget -q "https://github.com/yue0706/auto_bbr/raw/main/bbr.sh" && chmod +x bbr.sh && ./bbr.sh
 sed -i '/^\*\ *soft\ *nofile\ *[[:digit:]]*/d' /etc/security/limits.conf
@@ -1582,6 +1887,8 @@ service dropbear restart
 systemctl daemon-reload
 systemctl enable yakult
 systemctl restart yakult
+systemctl enable coke
+systemctl restart coke
 }
 
 function remove() {
@@ -1654,6 +1961,8 @@ fi
  echo -e "\033[0;35m Installing BBR...\033[0m"
  service
  service1
+ ovpnWSS
+ ovpnWSS1
  BBR
  ddos
 setting
