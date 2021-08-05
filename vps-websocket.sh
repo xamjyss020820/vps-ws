@@ -27,7 +27,7 @@ WS_Port1='80'
 WS_Port2='8080'
 
 # Your SSH Banner
-SSH_Banner='https://pastebin.com/raw/CnKVT3de'
+SSH_Banner='https://pastebin.com/raw/H7iNhF7m'
 
 # Dropbear Ports
 Dropbear_Port1='900'
