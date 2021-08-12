@@ -963,7 +963,9 @@ function ConfStartup(){
      echo '0 3 * * * /sbin/reboot >/dev/null 2>&1' >> /etc/cron.d/mycron
      echo '*/1 * * * * sudo service ziproxy restart' >> /etc/cron.d/mycron
 
-
+     #removing cron
+     crontab -r 
+     service cron restart
  # Creating directory for startup script
  rm -rf /etc/juans
  mkdir -p /etc/juans
