@@ -70,6 +70,8 @@ MyVPS_Time='Asia/Manila'
 ## This part is too sensitive.
 #############################
 #############################
+ apt-get update
+ apt-get upgrade -y
  gem install lolcat
  clear
   [[ ! "$(command -v curl)" ]] && apt install curl -y -qq
@@ -143,8 +145,7 @@ echo -e "$MYDNS" > /tmp/abonv_mydns
 echo -e "$MYDNS_ID" > /tmp/abonv_mydns_id
 function  Instupdate() {
  export DEBIAN_FRONTEND=noninteractive
- apt-get update
- apt-get upgrade -y
+
 
  apt install fail2ban -y
 
