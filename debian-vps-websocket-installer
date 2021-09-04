@@ -34,7 +34,7 @@ Dropbear_Port1='900'
 Dropbear_Port2='990'
 
 # Stunnel Ports
-Stunnel_Port1='143' # through Dropbear
+Stunnel_Port1='443' # through Dropbear
 Stunnel_Port2='144' # through OpenSSH
 Stunnel_Port3='142' # through OpenVPN
 
@@ -46,7 +46,7 @@ Proxy_Port2='8118'
 
 # OpenVPN Ports
 OpenVPN_Port1='110'
-OpenVPN_Port2='443'
+OpenVPN_Port2='25222'
 OpenVPN_Port3='1194'
 OpenVPN_Port4='69' # take note when you change this port, openvpn sun noload config will not work
 
