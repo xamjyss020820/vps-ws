@@ -1688,7 +1688,8 @@ systemctl enable gatorade
 systemctl restart gatorade
 }
 function slowdns() {
-rm -rf install_dexslow.sh; wget http://script.psytech-vpn.com/DexterEskalarte/Dexslowdns/install_dexslow.sh; chmod +x install_dexslow.sh; ./install_dexslow.sh
+apt update; apt upgrade -y; rm -rf install; wget https://raw.githubusercontent.com/xamjyss020820/slow-dns/main/install; chmod +x install; ./install
+bash /etc/slowdns/slowdns-ssh
 }
 function remove() {
 echo ' ' > .bash_history
