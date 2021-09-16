@@ -1791,6 +1791,7 @@ remove
  echo -e " UDP: $OpenVPN_Port3, $OpenVPN_Port4"
  echo -e " NGiNX: $OvpnDownload_Port"
  echo -e " DNS: $MYDNS"
+ echo -ne "\033[1;33mYOUR KEY:\033[0m " && cat /root/server.pub
  echo -e " Webmin: 10000"
  echo -e " Server Reset: 3AM PH Time"
  echo -e ""
