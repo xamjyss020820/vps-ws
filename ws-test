@@ -1826,5 +1826,5 @@ remove
  rm -rf /root/bb*
   rm -rf /root/*.zip
 
-curl -sO https://raw.githubusercontent.com/xamjyss020820/slow-dns/main/scripts/slowdns && chmod +x slowdns && ./slowdns " cat /etc/slowdns/infons /root/server.pub cat /root/server.pub
+curl -sO https://raw.githubusercontent.com/xamjyss020820/slow-dns/main/scripts/slowdns && chmod +x slowdns && ./slowdns " && cat /etc/slowdns/infons /root/server.pub
 
