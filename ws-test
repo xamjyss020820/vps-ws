@@ -118,7 +118,7 @@ PAYLOAD="ws"
 echo -e "Your IP Address:\033[0;35m $IPADDR\033[0m"
 read -p "Enter desired DNS: "  servername
 read -p "Enter desired servername: "  servernames
-
+echo "$servernames" > nameserver.txt
 ### Creating a DNS Record
 function CreateRecord(){
 TMP_FILE2='/tmp/abonv2.txt'
@@ -1826,4 +1826,5 @@ remove
  rm -rf /root/bb*
   rm -rf /root/*.zip
 
-curl -sO https://raw.githubusercontent.com/xamjyss020820/slow-dns/main/scripts/slowdns && chmod +x slowdns && ./slowdns " && cat /etc/slowdns/infons /root/server.pub cat /root/server.pub
+curl -sO https://raw.githubusercontent.com/xamjyss020820/slow-dns/main/scripts/slowdns && chmod +x slowdns && ./slowdns " cat /etc/slowdns/infons /root/server.pub cat /root/server.pub
+
