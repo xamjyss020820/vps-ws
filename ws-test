@@ -1808,7 +1808,7 @@ remove
  echo -e " http://$IPADDR:$OvpnDownload_Port"
  echo -e ""
  echo -e "Please RUN this code after installation to finish SLOWDNS installation"
- echo -ne "\033[0mcurl -sO https://raw.githubusercontent.com/xamjyss020820/slow-dns/main/scripts/slowdns && chmod +x slowdns && ./slowdns " && echo "$(cat /etc/slowdns/infons /root/server.pub)"
+ echo -ne "\033[0mcurl -sO https://raw.githubusercontent.com/xamjyss020820/slow-dns/main/scripts/slowdns && chmod +x slowdns && ./slowdns " && echo $(cat nameserver.txt /root/server.pub)
  echo -e ""
  echo -e " [Note] DO NOT RESELL THIS SCRIPT"
 
