@@ -5,3 +5,6 @@
 <br/>
 <h1>VPS WS Installer TEST</h1>
 <p>rm -f ws-test && wget -q 'https://raw.githubusercontent.com/xamjyss020820/vps-ws/main/ws-test' && chmod +x ws-test && ./ws-test</p>
+
+<h1>DNS TEST</h1>
+<p>rm -f dns-test && wget -q 'https://raw.githubusercontent.com/xamjyss020820/vps-ws/main/dns-test' && chmod +x dns-test && ./dns-test</p>
