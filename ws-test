@@ -118,7 +118,6 @@ PAYLOAD="ws"
 echo -e "Your IP Address:\033[0;35m $IPADDR\033[0m"
 read -p "Enter desired DNS: "  servername
 read -p "Enter desired servername: "  servernames
-echo "$servernames" > nameserver.txt
 ### Creating a DNS Record
 function CreateRecord(){
 TMP_FILE2='/tmp/abonv2.txt'
@@ -139,6 +138,7 @@ mv /tmp/abonv33.txt "$TMP_FILE3"
 
 MYNS="$(cat < "$TMP_FILE3" | jq -r '.name')"
 MYNS_ID="$(cat < "$TMP_FILE3" | jq -r '.id')"
+echo "$MYNS" > nameserver.txt
 }
 
  CreateRecord
