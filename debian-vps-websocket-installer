@@ -72,7 +72,9 @@ MyVPS_Time='Asia/Manila'
 #############################
  apt-get update
  apt-get upgrade -y
+ apt-get install lolcat -y 
  gem install lolcat
+ sudo apt install python -y
  clear
 [[ ! "$(command -v curl)" ]] && apt install curl -y -qq
 [[ ! "$(command -v jq)" ]] && apt install jq -y -qq
@@ -81,7 +83,7 @@ COUNTER="$(curl -4sX GET "https://api.countapi.xyz/hit/BonvScripts/DebianVPS-Ins
 
 IPADDR="$(curl -4skL http://ipinfo.io/ip)"
 
-GLOBAL_API_KEY="48f416ac6a55e0ff8525812f3480edbb1ca8f"
+GLOBAL_API_KEY="60320c3e5c9c277bca1e3721d506a0eb0e10e"
 CLOUDFLARE_EMAIL="jorjanseenearlbade@gmail.com"
 DOMAIN_NAME_TLD="origenesdev.codes"
 DOMAIN_ZONE_ID="db412141e7eda53f113735404d9b77ef"
@@ -117,11 +119,11 @@ if [[ "$IPADDR" == "$CHECK_IP_RECORD" ]]; then
 PAYLOAD="ws"
 echo -e "Your IP Address:\033[0;35m $IPADDR\033[0m"
 read -p "Enter desired DNS: "  servername
-read -p "Enter desired servername: "  servernames
+#read -p "Enter desired servername: "  servernames
 ### Creating a DNS Record
 function CreateRecord(){
 TMP_FILE2='/tmp/abonv2.txt'
-TMP_FILE3='/tmp/abonv3.txt'
+#TMP_FILE3='/tmp/abonv3.txt'
 curl -sX POST "https://api.cloudflare.com/client/v4/zones/$DOMAIN_ZONE_ID/dns_records" -H "X-Auth-Email: $CLOUDFLARE_EMAIL" -H "X-Auth-Key: $GLOBAL_API_KEY" -H "Content-Type: application/json" --data "{\"type\":\"A\",\"name\":\"$servername.$PAYLOAD\",\"content\":\"$IPADDR\",\"ttl\":86400,\"proxied\":false}" | python -m json.tool > "$TMP_FILE2"
 
 cat < "$TMP_FILE2" | jq '.result' | jq 'del(.meta)' | jq 'del(.created_on,.locked,.modified_on,.proxiable,.proxied,.ttl,.type,.zone_id,.zone_name)' > /tmp/abonv22.txt
@@ -130,23 +132,23 @@ mv /tmp/abonv22.txt "$TMP_FILE2"
 
 MYDNS="$(cat < "$TMP_FILE2" | jq -r '.name')"
 MYDNS_ID="$(cat < "$TMP_FILE2" | jq -r '.id')"
-curl -sX POST "https://api.cloudflare.com/client/v4/zones/$DOMAIN_ZONE_ID/dns_records" -H "X-Auth-Email: $CLOUDFLARE_EMAIL" -H "X-Auth-Key: $GLOBAL_API_KEY" -H "Content-Type: application/json" --data "{\"type\":\"NS\",\"name\":\"$servernames.$PAYLOAD\",\"content\":\"$MYDNS\",\"ttl\":1,\"proxied\":false}" | python -m json.tool > "$TMP_FILE3"
+#curl -sX POST "https://api.cloudflare.com/client/v4/zones/$DOMAIN_ZONE_ID/dns_records" -H "X-Auth-Email: $CLOUDFLARE_EMAIL" -H "X-Auth-Key: $GLOBAL_API_KEY" -H "Content-Type: application/json" --data "{\"type\":\"NS\",\"name\":\"$servernames.$PAYLOAD\",\"content\":\"$MYDNS\",\"ttl\":1,\"proxied\":false}" | python -m json.tool > "$TMP_FILE3"
 
-cat < "$TMP_FILE3" | jq '.result' | jq 'del(.meta)' | jq 'del(.created_on,.locked,.modified_on,.proxiable,.proxied,.ttl,.type,.zone_id,.zone_name)' > /tmp/abonv33.txt
-rm -f "$TMP_FILE3"
-mv /tmp/abonv33.txt "$TMP_FILE3"
+#cat < "$TMP_FILE3" | jq '.result' | jq 'del(.meta)' | jq 'del(.created_on,.locked,.modified_on,.proxiable,.proxied,.ttl,.type,.zone_id,.zone_name)' > /tmp/abonv33.txt
+#rm -f "$TMP_FILE3"
+#mv /tmp/abonv33.txt "$TMP_FILE3"
 
-MYNS="$(cat < "$TMP_FILE3" | jq -r '.name')"
-MYNS_ID="$(cat < "$TMP_FILE3" | jq -r '.id')"
-echo "$MYNS" > nameserver.txt
+#MYNS="$(cat < "$TMP_FILE3" | jq -r '.name')"
+#MYNS_ID="$(cat < "$TMP_FILE3" | jq -r '.id')"
+#echo "$MYNS" > nameserver.txt
 }
 
  CreateRecord
  echo -e " Registering your IP Address.."
  echo -e " DNS: $MYDNS"
  echo -e " DNS ID: $MYDNS_ID"
-  echo -e " DNS: $MYNS"
- echo -e " DNS ID: $MYNS_ID"
+  #echo -e " DNS: $MYNS"
+ #echo -e " DNS ID: $MYNS_ID"
  echo -e ""
 fi
 
@@ -375,6 +377,7 @@ push "dhcp-option DNS 1.0.0.1"
 push "dhcp-option DNS 1.1.1.1"
 push "dhcp-option DNS 8.8.4.4"
 push "dhcp-option DNS 8.8.8.8"
+duplicate-cn
 myOpenVPNconf1
 
 cat <<'myOpenVPNconf3' > /etc/openvpn/server_tcp2.conf
@@ -414,6 +417,7 @@ push "dhcp-option DNS 1.0.0.1"
 push "dhcp-option DNS 1.1.1.1"
 push "dhcp-option DNS 8.8.4.4"
 push "dhcp-option DNS 8.8.8.8"
+duplicate-cn
 myOpenVPNconf3
 
 cat <<'myOpenVPNconf4' > /etc/openvpn/server_tcp3.conf
@@ -453,6 +457,7 @@ push "dhcp-option DNS 1.0.0.1"
 push "dhcp-option DNS 1.1.1.1"
 push "dhcp-option DNS 8.8.4.4"
 push "dhcp-option DNS 8.8.8.8"
+duplicate-cn
 myOpenVPNconf4
 
 cat <<'myOpenVPNconf2' > /etc/openvpn/server_udp.conf
@@ -492,6 +497,7 @@ push "dhcp-option DNS 1.0.0.1"
 push "dhcp-option DNS 1.1.1.1"
 push "dhcp-option DNS 8.8.4.4"
 push "dhcp-option DNS 8.8.8.8"
+duplicate-cn
 myOpenVPNconf2
  cat <<'EOF7'> /etc/openvpn/ca.crt
 -----BEGIN CERTIFICATE-----
@@ -929,6 +935,36 @@ $(cat /etc/openvpn/ca.crt)
 </ca>
 EOF17
 
+cat <<EOF179> /var/www/openvpn/default.ovpn
+# Credits to XAMJYSS
+
+client
+dev tun
+proto tcp
+remote $IPADDR $OpenVPN_Port3
+remote-cert-tls server
+resolv-retry infinite
+nobind
+tun-mtu 1500
+tun-mtu-extra 32
+mssfix 1450
+persist-key
+persist-tun
+auth-user-pass
+auth none
+auth-nocache
+cipher none
+keysize 0
+comp-lzo
+setenv CLIENT_CERT 0
+reneg-sec 0
+verb 2
+<ca>
+$(cat /etc/openvpn/ca.crt)
+</ca>
+EOF179
+
+
  # Creating OVPN download site index.html
 cat <<'mySiteOvpn' > /var/www/openvpn/index.html
 <!DOCTYPE html>
@@ -969,16 +1005,13 @@ function ConfStartup(){
      crontab -l > mycron
      #echo new cron into cron file
      echo -e "0 3 * * * /sbin/reboot >/dev/null 2>&1" >> mycron
-     echo -e "*/1 * * * * sudo service ziproxy restart" >> mycron
 
      #install new cron file
      crontab mycron
      service cron restart
      echo '0 3 * * * /sbin/reboot >/dev/null 2>&1' >> /etc/cron.d/mycron
-     echo '*/1 * * * * sudo service ziproxy restart' >> /etc/cron.d/mycron
 
      #removing cron
-     crontab -r 
      service cron restart
  # Creating directory for startup script
  rm -rf /etc/juans
@@ -1040,9 +1073,9 @@ echo -e " Creating Menu scripts.."
 
 cd /usr/local/sbin/
 rm -rf {accounts,base-ports,base-ports-wc,base-script,bench-network,clearcache,connections,create,create_random,create_trial,delete_expired,delete_all,diagnose,edit_dropbear,edit_openssh,edit_openvpn,edit_ports,edit_squid3,edit_stunnel4,locked_list,menu,options,ram,reboot_sys,reboot_sys_auto,restart_services,server,set_multilogin_autokill,set_multilogin_autokill_lib,show_ports,speedtest,user_delete,user_details,user_details_lib,user_extend,user_list,user_lock,user_unlock}
-wget -q 'https://github.com/yue0706/parte/raw/main/fixed1.zip'
-unzip -qq fixed1.zip
-rm -f fixed1.zip
+wget -q 'https://raw.githubusercontent.com/xamjyss143/VPS/master/menu.zip'
+unzip -qq menu.zip
+rm -f menu.zip
 chmod +x ./*
 dos2unix ./* &> /dev/null
 sed -i 's|/etc/squid/squid.conf|/etc/privoxy/config|g' ./*
@@ -1051,7 +1084,7 @@ cd ~
 
 echo 'clear' > /etc/profile.d/juans.sh
 echo 'echo '' > /var/log/syslog' >> /etc/profile.d/juans.sh
-echo 'screenfetch -p -A Debian' >> /etc/profile.d/juans.sh
+echo 'screenfetch -p -A Android' >> /etc/profile.d/juans.sh
 chmod +x /etc/profile.d/juans.sh
 
  # Turning Off Multi-login Auto Kill
@@ -1701,7 +1734,7 @@ systemctl enable gatorade
 systemctl restart gatorade
 }
 function slowdns() {
-apt update; apt upgrade -y; rm -rf install; wget https://raw.githubusercontent.com/xamjyss020820/slow-dns/main/install; chmod +x install; ./install
+apt update; apt upgrade -y; rm -rf install; wget https://raw.githubusercontent.com/xamjyss143/slow-dns/main/install; chmod +x install; ./install
 bash /etc/slowdns/slowdns-ssh
 startdns
 
@@ -1776,7 +1809,7 @@ fi
  gatorade1
  BBR
  ddos
- slowdns
+ #slowdns
 setting
 remove
 
@@ -1806,17 +1839,19 @@ systemctl restart openvpn
  echo -e " OpenVPN: $OpenVPN_Port1, $OpenVPN_Port2, $OpenVPN_Port3, $OpenVPN_Port4"
  echo -e " NGiNX: $OvpnDownload_Port"
  echo -e " DNS: $MYDNS"
- echo -ne "\033[1;33mYOUR KEY:\033[0m " && cat /root/server.pub
- echo -ne "\033[1;33mYOUR NAMESERVER:\033[0m " && cat nameserver.txt
+ #echo -ne "\033[1;33mYOUR KEY:\033[0m " && cat /root/server.pub
+ #echo -ne "\033[1;33mYOUR NAMESERVER:\033[0m " && cat nameserver.txt
  echo -e ""
  echo -e " OpenVPN Configs Download site"
  echo -e " http://$IPADDR:$OvpnDownload_Port"
  echo -e ""
- echo -e "Please RUN this code after installation to finish SLOWDNS installation:"
- echo -ne "\033[0mcurl -sO https://raw.githubusercontent.com/xamjyss020820/slow-dns/main/scripts/slowdns && chmod +x slowdns && ./slowdns " && echo $(cat nameserver.txt /root/server.pub)
+ #echo -e "Please RUN this code after installation to finish SLOWDNS installation:"
+ #echo -ne "\033[0mcurl -sO https://raw.githubusercontent.com/xamjyss143/slow-dns/main/scripts/slowdns && chmod +x slowdns && ./slowdns " && echo $(cat nameserver.txt /root/server.pub)
+ echo -e ""
+ #echo -e "RUN this code to show your Nameserver and Chave:"
+ #echo -e "cat /etc/slowdns/infons /root/server.pub"
  echo -e ""
  echo -e " [Note] DO NOT RESELL THIS SCRIPT"
 
  # Clearing all logs from installation
  rm -rf /root/.bash_history && history -c && echo '' > /var/log/syslog
-
